@@ -18,7 +18,6 @@ cloud_sql_proxy.exe
 
 # dependencies
 /noteapp_react/node_modules
-/noteapp_react/build
 /.pnp
 .pnp.js
 
