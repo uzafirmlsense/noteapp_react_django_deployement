@@ -1,0 +1,1 @@
+export const backendRoot ='https://chakraui-note-app-2drk4lqwsa-uc.a.run.app/'
