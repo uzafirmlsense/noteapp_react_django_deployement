@@ -4,9 +4,27 @@ import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter as Router, Route, Routes, redirect } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 
 function App() {
+
+  // function handleCallbackResponse(response){
+  //   console.log("Encoded JWT ID token: " + response.credential);
+  // }
+
+  // useEffect(()=>{
+  //   google.accounts.id.initialize({
+  //     client_id: "59866668171-ovrvhrn6jtcr3g9kklfrev82okl960f0.apps.googleusercontent.com",
+  //     callback: handleCallbackResponse
+  //   });
+
+  //   google.accounts.id.renderButton(
+  //     document.getElementById("signInDiv"),
+  //     {theme:"outline", size: "large"}
+  //   )
+  // },[]);
+
   return (
     <div className="App">
       <AuthProvider>

@@ -29,6 +29,7 @@ import { Outlet, Navigate } from "react-router-dom";
 const Login = () => {
   let {user}=useContext(AuthContext)
   const navigate = useNavigate();
+  const google = window.google;
 
   useEffect(() => {
     console.log("hello")
@@ -36,6 +37,22 @@ const Login = () => {
       navigate("/")
     }
   });
+
+  function handleCallbackResponse(response){
+    console.log("Encoded JWT ID token: " + response.credential);
+  }
+
+  useEffect(()=>{
+    google.accounts.id.initialize({
+      client_id: "59866668171-ovrvhrn6jtcr3g9kklfrev82okl960f0.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      {theme:"outline", size: "large"}
+    );
+  },[]);
 
   let { loginUser } = useContext(AuthContext);
   return (
@@ -105,6 +122,8 @@ const Login = () => {
               >
                 Log In
               </Button>
+
+              <div id="signInDiv"></div>
               {/* {error ? <font color="red">{error}</font> : <font></font>} */}
             </FormControl>
           </form>
