@@ -1,1 +1,1 @@
-export const backendRoot ='https://chakraui-note-app-2drk4lqwsa-uc.a.run.app/'
+export const backendRoot ='https://noteapp-react-django-uzafir-dot-cloud-work-314310.ew.r.appspot.com/'
