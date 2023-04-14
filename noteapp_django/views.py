@@ -75,6 +75,18 @@ def getroutes(request):
           }
     return JsonResponse(dict)
 
+@api_view(['POST'])
+def verifyexists(request):
+    email=request.data.get("email", None)
+    username=email.split("@")[0]
+    password="JFek54}T@p0$#Q"
+    if (User.objects.filter(username=username).exists()):
+       pass
+    else:
+        User.objects.create(username=username,password=password)
+
+    return Response({"status":True,"username":username,"password":password})
+
 # @api_view(['GET'])
 # def getRoutes(request):
 #     routes=[

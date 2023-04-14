@@ -5,10 +5,24 @@ import { BrowserRouter as Router, Route, Routes, redirect } from "react-router-d
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { useEffect } from "react";
+import { gapi } from "gapi-script";
 import Navbar from "./components/Navbar";
 
 function App() {
+  const client_id =
+    "59866668171-ovrvhrn6jtcr3g9kklfrev82okl960f0.apps.googleusercontent.com";
 
+
+  useEffect(()=>{
+    function start(){
+      gapi.client.init({
+        clientId:client_id,
+        scope:""
+      })
+    };
+
+    gapi.load('client:auth2',start);
+  });
   // function handleCallbackResponse(response){
   //   console.log("Encoded JWT ID token: " + response.credential);
   // }

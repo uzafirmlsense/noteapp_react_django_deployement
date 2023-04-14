@@ -17,6 +17,7 @@ urlpatterns = [
     path('allnotes/',views.notes_list,name="notes_list"),
     path('getroutes/',views.getroutes),
     path('add/',views.add_note,name="add_note"),
+    path('verifyexists/',views.verifyexists),
     path('delete/',views.del_note,name="del_note"),
     path('update/',views.update_note,name="update_note"),
 ]

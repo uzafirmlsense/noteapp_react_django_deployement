@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { GoogleLogin } from "react-google-login";
+import { backendRoot } from "../backendinfo";
 import {
   Flex,
   Spacer,
@@ -24,35 +26,69 @@ import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Outlet, Navigate } from "react-router-dom";
 
-<Navigate to="/login" />
+<Navigate to="/login" />;
 
 const Login = () => {
-  let {user}=useContext(AuthContext)
+  let { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const google = window.google;
+  const client_id =
+    "59866668171-ovrvhrn6jtcr3g9kklfrev82okl960f0.apps.googleusercontent.com";
 
   useEffect(() => {
-    console.log("hello")
-    if (user){
-      navigate("/")
+    console.log("hello");
+    if (user) {
+      navigate("/");
     }
   });
 
-  function handleCallbackResponse(response){
-    console.log("Encoded JWT ID token: " + response.credential);
-  }
-
-  useEffect(()=>{
-    google.accounts.id.initialize({
-      client_id: "59866668171-ovrvhrn6jtcr3g9kklfrev82okl960f0.apps.googleusercontent.com",
-      callback: handleCallbackResponse
+  const google_login_success = async (res) => {
+    let response = await fetch(`${backendRoot}verifyexists/`, {
+      method: "POST",
+      headers: {
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/json',
+      },
+      body: JSON.stringify({ email: res.profileObj.email }),
     });
+    let data = await response.json();
+    if (data.status == true) {
+      console.log(data.username)
+      const username = data.username;
+      const password = "JFek54}T@p0$#Q";
+      const fakeEvent = {
+        preventDefault: function () {},
+        target: {
+          username: { value: username },
+          password: { value: password },
+        },
+      };
+      loginUser(fakeEvent);
+    }
+    console.log("Login Success! Current user: ", res.profileObj);
+    console.log("Login Success! Current user: ", res.profileObj.email);
+  };
 
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      {theme:"outline", size: "large"}
-    );
-  },[]);
+  const google_login_failure = (res) => {
+    console.log("Login Failed! res: ", res);
+  };
+
+  // function handleCallbackResponse(response) {
+  //   console.log("Encoded JWT ID token: " + response.credential);
+  // }
+
+  // useEffect(() => {
+  //   google.accounts.id.initialize({
+  //     client_id:
+  //       "59866668171-ovrvhrn6jtcr3g9kklfrev82okl960f0.apps.googleusercontent.com",
+  //     callback: handleCallbackResponse,
+  //   });
+
+  //   google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+  //     theme: "outline",
+  //     size: "large",
+  //   });
+  // }, []);
 
   let { loginUser } = useContext(AuthContext);
   return (
@@ -113,7 +149,7 @@ const Login = () => {
                 // isLoading={loading}
                 type="submit"
                 fontSize="sm"
-                colorScheme='teal'
+                colorScheme="teal"
                 variant="solid"
                 fontWeight="500"
                 w="100%"
@@ -123,7 +159,16 @@ const Login = () => {
                 Log In
               </Button>
 
-              <div id="signInDiv"></div>
+              <div id="signInDiv">
+                <GoogleLogin
+                  clientId={client_id}
+                  buttonText="Login"
+                  onSuccess={google_login_success}
+                  onFailure={google_login_failure}
+                  cookiePolicy={"single_host_origin"}
+                  isSignedIn={true}
+                />
+              </div>
               {/* {error ? <font color="red">{error}</font> : <font></font>} */}
             </FormControl>
           </form>
