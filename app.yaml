@@ -30,4 +30,4 @@ handlers:
   upload: noteapp_react/build/index.html
   
   
-entrypoint: gunicorn -b :$PORT core.wsgi
+entrypoint: gunicorn -b :$PORT notesite.wsgi
