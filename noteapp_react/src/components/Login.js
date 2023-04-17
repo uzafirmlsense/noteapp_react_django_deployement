@@ -162,7 +162,7 @@ const Login = () => {
               <div id="signInDiv">
                 <GoogleLogin
                   clientId={client_id}
-                  buttonText="Login"
+                  buttonText="Login with google"
                   onSuccess={google_login_success}
                   onFailure={google_login_failure}
                   cookiePolicy={"single_host_origin"}
