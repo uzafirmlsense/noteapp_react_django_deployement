@@ -1,7 +1,7 @@
 venv 
 
 .idea
-
+static/
 service-account-key.json
 core/__pycache__/
 __pycache__/
