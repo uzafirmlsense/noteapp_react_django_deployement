@@ -150,7 +150,7 @@ DATABASES = {
         'USER': os.getenv('DB_USER', None),
         'PASSWORD': os.getenv('DB_PWD', None),
         'NAME': os.getenv('DB_NAME', None),
-        # 'PORT': os.getenv('DB_PORT', None)
+        'PORT': os.getenv('DB_PORT', None)
     }
 }
 
@@ -231,6 +231,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 
 # version: '3.9'
 
