@@ -36,7 +36,7 @@ jobs:
         echo  DB_USER="${{ secrets.DB_USER }}" >> .env
         echo  DB_PWD="${{ secrets.DB_PWD }}" >> .env
         echo  DB_HOST="${{ secrets.DB_HOST }}" >> .env
-        echo  DJANGO_SECRET_KEY="${{ secrets.SECRET_KEY }}" >> .env
+        echo  SECRET_KEY="${{ secrets.SECRET_KEY }}" >> .env
     #     echo  DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}" >> .env
     #     echo  BUCKET="${{ secrets.BUCKET }}" >> .env
     #     echo  GOOGLE_APPLICATION_CREDENTIALS="./service-account-key.json"
